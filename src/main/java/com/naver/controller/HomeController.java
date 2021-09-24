@@ -281,4 +281,9 @@ public class HomeController {
 
 	}
 
+	//비번찾기 폼
+	@RequestMapping("/pwd_find")
+	public String pwd_find() {
+		return "main/pwd_find";
+	}
 }

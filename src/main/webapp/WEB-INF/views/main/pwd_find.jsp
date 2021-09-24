@@ -7,29 +7,20 @@
 <script>
  function login_check(){
     if($.trim($("#login_id").val())==""){
-       alert("로그인 아이디를 입력하세요!");
+       alert("회원 이메일을 입력하세요!");
        $("#login_id").val("").focus();
        return false;
     }
     if($.trim($("#login_pwd").val())==""){
-       alert("로그인 비번을 입력하세요!");
+       alert("회원이름을 입력하세요");
        $("#login_pwd").val("").focus();
        return false;
     }
- }//로그인 인증 유효성 검증
- 
- //비번찾기
- function pwd_find(){
-    $url="pwd_find";//매핑주소
-    window.open($url,"비번검색","width=400px,height=300px"+
-          ",scrollbars=yes");
-    //open(공지창경로,공지창이름,속성) 메서드로 폭이 300픽셀,
-    //높이가 300픽셀,스크롤바가 생성되는 새로운 공지창을 만든다.
  }
 </script>
 
 
-<title>Login</title>
+<title>비번검색</title>
 <script src="./resources/js/jquery.js"></script>
 <script src="./resources/js/member.js"></script>
 
@@ -53,24 +44,24 @@
 
 					<!-- 로그인버튼 -->
 					<form method="POST" action="member_login_ok" class="onboarding-form" onsubmit="return login_check();">
-						<h2 class="onboarding-headline">로그인</h2>
-						<p class="onboarding-form-description">환영합니다!</p>
+						<h2 class="onboarding-headline">비번찾기</h2>
+						<p class="onboarding-form-description">비밀번호를 잊으셨나요?</p>
 
 						<label for="email" class="input-wrapper -default -grey ">
 							<input type="email" id="login_id" class="input" name="login_id" placeholder="Your Email" value=""> 
 							<span class="input-notice">이메일 주소를 입력해주세요.</span>
 						</label> 
 						
-						<label for="password" class="input-wrapper -password -default -grey"> 
-						<input type="password" id="login_pwd" name="login_pwd" class="input" placeholder="Password"> 
-						<span class="input-notice">8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.</span>
+						<label for="password" class="input-wrapper -password -default -grey" > 
+						<input id="pwd_name" name="pwd_name" class="input" placeholder="Your name"> 
+						<span class="input-notice">회원 이름을 입력해주세요.</span>
 						</label>
 
 						<div class="onboarding-form-controls">
-							<button type="submit" class="btn -aboveMediumLarge -red">로그인</button>
+							<button type="submit" class="btn -aboveMediumLarge -red">이메일 전송</button>
 							<div class="onboarding-form-controls-variants">
-								<a href="Join" class="onboarding-form-controls-link">회원가입</a>
-								<br> <a href="pwd_find" class="onboarding-form-controls-link -forgot">비밀번호 찾기</a>
+								
+								
 							</div>
 						</div>
 					</form>
