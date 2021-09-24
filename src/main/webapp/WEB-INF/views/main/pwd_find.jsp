@@ -44,8 +44,8 @@
 
 					<!-- 로그인버튼 -->
 					<form method="POST" action="member_login_ok" class="onboarding-form" onsubmit="return login_check();">
-						<h2 class="onboarding-headline">비번찾기</h2>
-						<p class="onboarding-form-description">비밀번호를 잊으셨나요?</p>
+						<h2 class="onboarding-headline">비밀번호를 잊으셨나요?</h2>
+						<p class="onboarding-form-description">이메일로 임시 비밀번호를 전송합니다</p>
 
 						<label for="email" class="input-wrapper -default -grey ">
 							<input type="email" id="login_id" class="input" name="login_id" placeholder="Your Email" value=""> 

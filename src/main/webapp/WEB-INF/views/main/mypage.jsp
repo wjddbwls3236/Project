@@ -47,13 +47,18 @@
 						<li><a href="#link_main_text2">CONTACT</a></li>
 					</ul>
 
+					<c:if test="${empty sessionScope}">
+					<div class="login"><a href="Login">로그인</a></div>
+					</c:if>
+					
+					<c:if test="${!empty sessionScope}">
 					<div class="my_page">
 						<a href="mypage?recipy_name=${m.mem_nic}">마이페이지</a>
 					</div>
-
-					<div class="logout">
+					<div class="login">
 						<a href="member_logout">로그아웃</a>
 					</div>
+					</c:if>
 
 
 				</div>

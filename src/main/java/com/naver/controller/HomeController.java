@@ -286,4 +286,12 @@ public class HomeController {
 	public String pwd_find() {
 		return "main/pwd_find";
 	}
+	
+	//비번찾기
+	@RequestMapping("/pwd_find_ok")
+	public ModelAndView pwd_find_ok() {
+		ModelAndView fm=new ModelAndView();
+		return fm;
+		
+	}
 }

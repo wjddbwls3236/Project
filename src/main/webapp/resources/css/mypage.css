@@ -320,3 +320,14 @@ footer > div:last-child{
 	text-align: center;
 	padding: 10px;
 }
+.login a {
+	display: inline-block;
+	color: #fff;
+	width: 73px;
+	margin: 30px 10px 0 0;
+	font-size: 17px;
+}
+
+.login a:hover {
+	color: red;
+}

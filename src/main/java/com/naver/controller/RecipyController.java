@@ -220,8 +220,6 @@ public class RecipyController {
 		//// 순서를 토큰으로 분리 하기////////////////
 		String[] tokens = r.getRecipy_cont().split("<br>");
 
-		
-
 		// 토큰을 리스트로 받아 넘기기
 		List<String> tokenlist = new ArrayList<String>();
 		for (int i = 0; i < tokens.length; i++) {
@@ -243,7 +241,7 @@ public class RecipyController {
 		for (int i = 0; i < tokens3.length; i++) {
 			tokenlist3.add(tokens3[i]);
 		}
-		
+
 		ModelAndView cm = new ModelAndView();
 		if (id != null) {
 			MemberVO m = this.memberService.getMember(id);
@@ -253,7 +251,7 @@ public class RecipyController {
 			cm.addObject("token2", tokenlist2);
 			cm.addObject("token3", tokenlist3);
 			cm.addObject("m", m);// 마이페이지에 닉네임을 넘기기 위한 회원정보
-			
+
 			return cm;
 		} else {
 			cm.setViewName("recipy/recipy_cont");
@@ -270,30 +268,31 @@ public class RecipyController {
 	public ModelAndView mypage(String recipy_name, RecipyVO r, HttpServletResponse response, HttpSession session)
 			throws Exception {
 		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = response.getWriter();// 출력스트림 생성
 
 		String id = (String) session.getAttribute("id");
-		if (id == null) {
-			out.println("<script>");
-			out.println("alert('다시 로그인 하세요');");
-			out.println("location='Login';");
-			out.println("</script>");
+
+		MemberVO mnic = this.memberService.getMemberId(recipy_name);// 닉네임 기준으로 회원정보 구하기
+		r.setRecipy_name(recipy_name);
+		List<RecipyVO> mylist = this.recipyService.myList(r);// 닉네임 기준으로 레시피 리스트 가져오기
+		ModelAndView mm = new ModelAndView();
+		
+		if (id == null) { //로그인 안했을때
+			mm.setViewName("/main/mypage");
+			mm.addObject("mylist", mylist);
+			mm.addObject("mnic", mnic);
+			return mm;
+			
 		} else {
 
-			MemberVO mnic = this.memberService.getMemberId(recipy_name);// 닉네임 기준으로 회원정보 구하기
 			MemberVO m = this.memberService.getMember(id);// 아이디 기준으로 회원정보 구하기
 
-			r.setRecipy_name(recipy_name);
-			List<RecipyVO> mylist = this.recipyService.myList(r);// 닉네임 기준으로 레시피 리스트 가져오기
-
-			ModelAndView mm = new ModelAndView();
 			mm.setViewName("/main/mypage");
 			mm.addObject("mylist", mylist);
 			mm.addObject("mnic", mnic);
 			mm.addObject("m", m); // 타인 마이페이지에서 자신 마이페이지로 갈때 id 기준으로 넘기기위해
 			return mm;
 		}
-		return null;
+		
 	}
 
 }
