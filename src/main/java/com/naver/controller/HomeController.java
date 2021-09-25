@@ -199,7 +199,7 @@ public class HomeController {
 	public String member_edit_ok(MemberVO m, HttpServletResponse response, HttpSession session) throws Exception {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();// 출력스트림 생성
-
+		String mem_nic= m.getMem_nic(); //마이페이지에 닉네임 보내주기 위해
 		String mail_id = (String) session.getAttribute("id");
 		if (mail_id == null) {
 			out.println("<script>");
@@ -214,7 +214,7 @@ public class HomeController {
 
 			out.println("<script>");
 			out.println("alert('정보 수정했습니다.');");
-			out.println("location='mypage';");
+			out.println("location='mypage?recipy_name="+mem_nic+"';");
 			out.println("</script>");
 		}
 		return null;

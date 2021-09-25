@@ -71,7 +71,7 @@
 		<ul>
 			<li>레시피</li>
 			
-			<c:if test="${sessionScope.id == mnic.mail_id}">
+			<c:if test="${sessionScope.id == mnic.mail_id}"> 
 			  <li><a href="member_edit">정보수정</a></li>
 			  <li><a href="member_del">회원탈퇴</a></li>
 			</c:if>

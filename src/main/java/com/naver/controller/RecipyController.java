@@ -263,7 +263,7 @@ public class RecipyController {
 		}
 	}
 
-	// 마이페이지
+	// 마이페이지(항상 닉네임 값을 받아야함)
 	@RequestMapping("/mypage")
 	public ModelAndView mypage(String recipy_name, RecipyVO r, HttpServletResponse response, HttpSession session)
 			throws Exception {
@@ -284,15 +284,27 @@ public class RecipyController {
 			
 		} else {
 
-			MemberVO m = this.memberService.getMember(id);// 아이디 기준으로 회원정보 구하기
+			MemberVO m = this.memberService.getMember(id);// 세션아이디 기준으로 회원정보 구하기
 
 			mm.setViewName("/main/mypage");
 			mm.addObject("mylist", mylist);
-			mm.addObject("mnic", mnic);
-			mm.addObject("m", m); // 타인 마이페이지에서 자신 마이페이지로 갈때 id 기준으로 넘기기위해
+			mm.addObject("mnic", mnic); //세션아이디와 닉네임기준 아이디가 동일할때 정보수정 가능해야 하므로 
+			mm.addObject("m", m); // 타인 마이페이지에서 자신 마이페이지로 갈때 id 기준으로 넘기기위해(세션 아이디가 달라도 타인 마이페이지를 볼수있게)
 			return mm;
 		}
 		
 	}
 
+	//레시피 삭제 
+	@RequestMapping("recipy_del")
+	public ModelAndView recipy_del(int recipy_no,HttpSession session) throws Exception {
+		
+		
+		
+		
+		ModelAndView rm = new ModelAndView();
+		
+		return rm;
+	}
+	
 }
