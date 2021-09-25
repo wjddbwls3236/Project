@@ -55,6 +55,9 @@
    select * from recipy where recipy_name = #{recipy_name}
  </select>
  
-
+<!-- 레시피 삭제 -->
+<delete id="recipy_del">
+  delete from recipy where recipy_no = #{recipy_no}
+</delete>
  
  </mapper>

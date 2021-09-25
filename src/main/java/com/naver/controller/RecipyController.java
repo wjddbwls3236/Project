@@ -214,8 +214,7 @@ public class RecipyController {
 
 		r = this.recipyService.getRecipyCont(recipy_no);
 
-		// 답변폼,수정폼,삭제폼일때는 조회수 증가를 안함.
-		// r = this.recipyService.getRecipyCont2(recipy_no);
+		
 
 		//// 순서를 토큰으로 분리 하기////////////////
 		String[] tokens = r.getRecipy_cont().split("<br>");
@@ -297,14 +296,29 @@ public class RecipyController {
 
 	//레시피 삭제 
 	@RequestMapping("recipy_del")
-	public ModelAndView recipy_del(int recipy_no,HttpSession session) throws Exception {
+	public void recipy_del(int recipy_no,RecipyVO r,HttpServletResponse response,HttpServletRequest request) throws Exception {
+		
+		   response.setContentType("text/html;charset=UTF-8");
+		   PrintWriter out=response.getWriter();
+		   String up=request.getRealPath("resources/upload");
+		   
+		   r = this.recipyService.getRecipyCont(recipy_no);//레시피 번호기준 레시피검색
+		   
+		   
+		   this.recipyService.delRecipy(recipy_no);//자료실 삭제
+		   
+		   if(r.getRecipy_file() != null) { //레시피 번호기준 첨부파일 있는경우
+			   File file=new File(up+r.getRecipy_file());//삭제할 파일 객체 생성
+			   file.delete();//폴더는 삭제되지 않고 기존 첨부파일만 삭제된다.
+		   }
+		   
+		   out.println("<script>");
+		   out.println("alert('레시피가 삭제되었습니다');");
+		   out.println("location='mypage?recipy_name="+r.getRecipy_name()+"';");
+		   out.println("</script>");
+		   
 		
 		
-		
-		
-		ModelAndView rm = new ModelAndView();
-		
-		return rm;
 	}
 	
 }

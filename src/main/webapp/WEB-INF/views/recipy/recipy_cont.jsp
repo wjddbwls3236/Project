@@ -120,6 +120,15 @@
 				$(function() {
 					listReply();
 					$("#btn-default").click(function() {
+						
+						
+						
+						if($.trim($("#mail_id").val())==""){
+						      alert("이메일을 입력하세요!");
+						      $("#mail_id").val("").focus();
+						     
+						
+						
 						reply();
 					});
 				});

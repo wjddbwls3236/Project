@@ -58,6 +58,11 @@ public class RecipyDAOImpl implements RecipyDAO {
 		return sqlSession.selectList("my_li",r);
 	}
 
+	@Override
+	public void delRecipy(int recipy_no) {   //레시피 삭제
+		sqlSession.delete("recipy_del",recipy_no);		
+	}
+
 	
 	
 }

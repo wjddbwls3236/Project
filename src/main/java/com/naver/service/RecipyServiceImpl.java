@@ -62,4 +62,9 @@ public class RecipyServiceImpl implements RecipyService {
 		return recipyDao.myList(r);
 	}
 
+	@Override
+	public void delRecipy(int recipy_no) {
+		recipyDao.delRecipy(recipy_no);		
+	}
+
 }

@@ -23,6 +23,8 @@ public interface RecipyDAO {
 
 	List<RecipyVO> myList(RecipyVO r);
 
+	void delRecipy(int recipy_no);
+
 	
 
 }

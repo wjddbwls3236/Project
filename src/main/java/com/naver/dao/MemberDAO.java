@@ -27,6 +27,8 @@ public interface MemberDAO {
 
 	void updatePwd(MemberVO m);
 
+	
+
 
 
 }

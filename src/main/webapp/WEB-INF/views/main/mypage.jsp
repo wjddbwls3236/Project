@@ -92,15 +92,19 @@
 								<%--음식사진 --%>
 								<a href="recipy_cont?recipy_no=${my.recipy_no}&state=cont"><img
 									class="recipy_img" src="./resources/upload${my.recipy_file}"></a>
-
+								
+								<c:if test="${sessionScope.id == mnic.mail_id}"> 
+								   <input type="button" value="삭제" onclick="location='recipy_del?recipy_no=${my.recipy_no}';" style="margin: 10px 10px 0 0;">
+								</c:if>
+								
 								<div class="recipy_info">
 									<%--정보들 묶는 박스 --%>
-
 									<div class="recipy_name">
 										<h3 class="recipy_name_h3">
 											<a href="recipy_cont?recipy_no=${my.recipy_no}">${my.recipy_title}</a>
 											<%--레시피 제목 --%>
-										</h3>
+										</h3>		
+										
 									</div>
 									<%--하이퍼링크 음식사진과 음식이름은 동일하게 --%>
 
@@ -120,7 +124,7 @@
 
 				<c:if test="${empty mylist}">
 					<tr>
-						<th colspan="5">자료실 목록이 없습니다!</th>
+						<th colspan="5">레시피 목록이 없습니다!</th>
 					</tr>
 				</c:if>
 
