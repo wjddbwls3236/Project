@@ -6,12 +6,12 @@
 <script src="./resources/js/jquery.js"></script>
 <script>
  function login_check(){
-    if($.trim($("#login_id").val())==""){
+    if($.trim($("#login_mail").val())==""){
        alert("회원 이메일을 입력하세요!");
        $("#login_id").val("").focus();
        return false;
     }
-    if($.trim($("#login_pwd").val())==""){
+    if($.trim($("#login_name").val())==""){
        alert("회원이름을 입력하세요");
        $("#login_pwd").val("").focus();
        return false;
@@ -43,17 +43,17 @@
 						style="width: 100%; height: 100%; display: inline-block;"> </a>
 
 					<!-- 로그인버튼 -->
-					<form method="POST" action="member_login_ok" class="onboarding-form" onsubmit="return login_check();">
+					<form method="POST" action="pwd_find_ok" class="onboarding-form" onsubmit="return login_check();">
 						<h2 class="onboarding-headline">비밀번호를 잊으셨나요?</h2>
 						<p class="onboarding-form-description">이메일로 임시 비밀번호를 전송합니다</p>
 
 						<label for="email" class="input-wrapper -default -grey ">
-							<input type="email" id="login_id" class="input" name="login_id" placeholder="Your Email" value=""> 
+							<input type="email" id="login_mail" class="input" name="login_mail" placeholder="Your Email" value=""> 
 							<span class="input-notice">이메일 주소를 입력해주세요.</span>
 						</label> 
 						
-						<label for="password" class="input-wrapper -password -default -grey" > 
-						<input id="pwd_name" name="pwd_name" class="input" placeholder="Your name"> 
+						<label for="name" class="input-wrapper -password -default -grey" > 
+						<input id="login_name" name="login_name" class="input" placeholder="Your name"> 
 						<span class="input-notice">회원 이름을 입력해주세요.</span>
 						</label>
 

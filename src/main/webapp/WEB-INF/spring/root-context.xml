@@ -44,6 +44,21 @@
  	<!-- 생성자를 통한 의존성 주입 -->
  	</bean>
  	
+ 	 <!-- Gmail -->
+  <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+    <property name="host" value="smtp.gmail.com" />
+    <property name="port" value="587" />
+    <property name="username" value="daliycook@gmail.com" />
+    <property name="password" value="" />
+    <property name="javaMailProperties">
+    <props>
+      <prop key="mail.smtp.auth">true</prop>
+      <prop key="mail.smtp.starttls.enable">true</prop>
+    </props>
+    </property>
+  </bean>
+  
+  
  	
  	<!-- DAOImpl의 @Repository이 설정된 부분을 스프링에서 오토스캔(자동으로 찾아서 ) 하여 등록하게 함. -->
  	<context:component-scan base-package="com.naver.dao"/>

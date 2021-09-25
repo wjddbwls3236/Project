@@ -23,6 +23,8 @@ public interface MemberService {
 
 	MemberVO getMemberId(String recipy_name);
 
+	MemberVO pwdMember(MemberVO m);
+
 	
 
 	

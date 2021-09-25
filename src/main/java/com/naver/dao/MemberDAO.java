@@ -23,6 +23,8 @@ public interface MemberDAO {
 
 	MemberVO getMemberId(String recipy_name);
 
+	MemberVO pwdMember(MemberVO m);
+
 
 
 }

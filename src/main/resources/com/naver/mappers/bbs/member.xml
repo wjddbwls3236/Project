@@ -49,4 +49,11 @@
  <select id="m_id" resultType="m">
     select * from member where mem_nic=#{mem_nic}
  </select>
+ 
+ <!-- 메일과 이름 기준으로 회원검색 -->
+ <select id="ped_m" resultType="m">
+   select * from member where mail_id=#{mail_id} and mem_name=#{mem_name}
+ </select>
+ 
+ 
  </mapper>

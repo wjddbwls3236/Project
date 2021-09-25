@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.service.MemberService;
@@ -287,9 +288,25 @@ public class HomeController {
 		return "main/pwd_find";
 	}
 	
-	//비번찾기
+	//이메일로 비번 보내기
 	@RequestMapping("/pwd_find_ok")
-	public ModelAndView pwd_find_ok() {
+	public ModelAndView pwd_find_ok(@RequestParam("login_mail")String login_mail,@RequestParam("login_name")String login_name,HttpServletResponse response, MemberVO m) 
+	throws Exception{
+		
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out=response.getWriter();//출력스트림 생성
+		
+		m.setMail_id(login_mail); m.setMem_name(login_name); //받아온 메일 아이디와 이름 저장 후
+		MemberVO pm=this.memberService.pwdMember(m); //회원아이디와 이름을 기준으로 오라클로부터 회원정보 검색
+		
+		if(pm==null) {
+			out.println("<script>");
+			out.println("alert('회원정보를 찾을 수 없습니다');");
+			out.println("history.back();");
+			out.println("</script>");
+		}else {
+			
+		}
 		ModelAndView fm=new ModelAndView();
 		return fm;
 		

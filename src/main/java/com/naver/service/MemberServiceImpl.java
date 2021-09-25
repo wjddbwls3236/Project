@@ -55,6 +55,11 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.getMemberId(recipy_name);
 	}
 
+	@Override
+	public MemberVO pwdMember(MemberVO m) {
+		return memberDao.pwdMember(m);
+	}
+
 	
 
 }

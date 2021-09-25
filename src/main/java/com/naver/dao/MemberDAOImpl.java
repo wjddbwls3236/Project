@@ -55,6 +55,11 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne("m_id",recipy_name);
 	}
 
+	@Override
+	public MemberVO pwdMember(MemberVO m) {
+		return sqlSession.selectOne("ped_m",m); //메일과 이름기준으로 회원정보 검색(비번찾기)
+	}
+
 	
 
 }
