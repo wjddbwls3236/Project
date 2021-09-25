@@ -25,6 +25,8 @@ public interface MemberService {
 
 	MemberVO pwdMember(MemberVO m);
 
+	void updatePwd(MemberVO m);
+
 	
 
 	

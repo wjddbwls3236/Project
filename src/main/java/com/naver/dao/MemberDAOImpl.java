@@ -60,6 +60,11 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne("ped_m",m); //메일과 이름기준으로 회원정보 검색(비번찾기)
 	}
 
+	@Override
+	public void updatePwd(MemberVO m) { // 임시비밀번호 수정
+		sqlSession.update("p_edit",m);
+	}
+
 	
 
 }

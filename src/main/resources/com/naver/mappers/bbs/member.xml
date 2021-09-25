@@ -55,5 +55,9 @@
    select * from member where mail_id=#{mail_id} and mem_name=#{mem_name}
  </select>
  
+ <!-- 임시비번 수정 -->
+ <update id="p_edit">
+   update member set mem_pwd=#{mem_pwd} where mail_id=#{mail_id} 
+ </update>
  
  </mapper>

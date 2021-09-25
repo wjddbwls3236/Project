@@ -1,11 +1,15 @@
 package com.naver.controller;
 
 import java.io.PrintWriter;
+import java.util.Random;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +26,10 @@ public class HomeController {
 
 	@Autowired
 	MemberService memberService;
+	
+	@Autowired
+	private JavaMailSender mailSender; //메일
+	
 
 	// 회원가입 페이지
 	@RequestMapping("/Join")
@@ -290,7 +298,7 @@ public class HomeController {
 	
 	//이메일로 비번 보내기
 	@RequestMapping("/pwd_find_ok")
-	public ModelAndView pwd_find_ok(@RequestParam("login_mail")String login_mail,@RequestParam("login_name")String login_name,HttpServletResponse response, MemberVO m) 
+	public void pwd_find_ok(@RequestParam("login_mail")String login_mail,@RequestParam("login_name")String login_name,HttpServletResponse response, MemberVO m) 
 	throws Exception{
 		
 		response.setContentType("text/html;charset=UTF-8");
@@ -305,10 +313,44 @@ public class HomeController {
 			out.println("history.back();");
 			out.println("</script>");
 		}else {
+			Random r=new Random();//난수 발생
+			int pwd_random=r.nextInt(100000);//0~100000 사이의 임의의 정수숫자 난수를 발생
+			String ran_pwd=Integer.toString(pwd_random);//임시정수를 문자열로 변경
+			m.setMem_pwd(PwdChange.getPassWordToXEMD5String(ran_pwd)); //임시 비번을 암호화
+			
+			this.memberService.updatePwd(m);//메일아이디 기준으로 임시비번을 수정
+			
+			//이메일 전송하기
+			String title= "dailycook 임시비밀번호"; //메일제목
+			String content= "임시 비밀번호는 "+ran_pwd+"입니다. 비밀번호를 변경하여 사용하세요"; //메일 내용
+			
+			try {
+				MimeMessage message = mailSender.createMimeMessage();
+				MimeMessageHelper messageHelper = new MimeMessageHelper(message,true,"UTF-8");
+				
+				messageHelper.setFrom("yujin.jeonga@gmail.com"); // 보내는사람 생략하면 정상작동을 안함
+				messageHelper.setTo(login_mail); // 받는사람 이메일
+				messageHelper.setSubject(title); //생략 가능
+				messageHelper.setText(content); // 메일 내용
+				
+				mailSender.send(message);
+				
+				
+				out.println("<script>");
+				out.println("alert('이메일로 전송되었습니다.');");
+				out.println("location='Login';");
+				out.println("</script>");
+				
+			}catch(Exception e) {
+				System.out.println(e);
+			}
 			
 		}
-		ModelAndView fm=new ModelAndView();
-		return fm;
 		
 	}
+	
+	
+	
+	
+	
 }

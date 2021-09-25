@@ -213,6 +213,7 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!--메일 관련 라이브러리  -->
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>

@@ -60,6 +60,11 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.pwdMember(m);
 	}
 
+	@Override
+	public void updatePwd(MemberVO m) {
+		memberDao.updatePwd(m);	
+	}
+
 	
 
 }
