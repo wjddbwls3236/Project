@@ -155,7 +155,9 @@ h1 {
 .nav>li>a {
 	color: #fff;
 }
-
+.nav>li>a:hover{
+	font-weight: bold;
+}
 .amount {
 	position: relative;
 	top: -66px;

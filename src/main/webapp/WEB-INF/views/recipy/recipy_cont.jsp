@@ -67,7 +67,7 @@
 				<div class="date">
 					<div class="view_notice">
 						<p class="view_notice_date">
-							<b style="border-right: 1px solid #dedede;">등록일:${fn:substring(r.recipy_date,0,10)}</b>
+							<b style="border-right: 1px solid #dedede;">등록일 :  ${fn:substring(r.recipy_date,0,10)}</b>
 							<c:if test="${!empty r.recipy_editdate}">
 								<b style="border-right: 1px solid #dedede;">수정일:${fn:substring(r.recipy_editdate,0,10)}</b>
 							</c:if>
@@ -121,13 +121,11 @@
 					listReply();
 					$("#btn-default").click(function() {
 						
-						
-						
-						if($.trim($("#mail_id").val())==""){
-						      alert("이메일을 입력하세요!");
-						      $("#mail_id").val("").focus();
-						     
-						
+						if($.trim($("#replytext").val())==""){ //댓글이 빈칸일때
+						      alert("댓글을 입력하세요!");
+						      $("#replytext").val("").focus();
+						      return false;
+						}
 						
 						reply();
 					});

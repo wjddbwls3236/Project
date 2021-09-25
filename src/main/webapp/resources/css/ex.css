@@ -144,7 +144,9 @@ body{
 }
 .admin p{
     display: inline-block;
+    color: #5561d5;
 }
+
 .number_view{
 	margin-top:px;
 }

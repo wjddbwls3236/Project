@@ -25,6 +25,12 @@
 }
 .admin_id{
 	margin-top: 40px;
+    color: #5561d5;
+    font-size: 20px;
+}
+.admin_id:hover{
+	
+	font-weight: bold;
 }
 /*음식 사진  및 재료*/
 .fix {

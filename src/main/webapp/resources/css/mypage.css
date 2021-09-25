@@ -61,7 +61,9 @@ h1{
   font-size: 48px;
   font-weight: lighter;
 } 
-
+.nav>li>a:hover{
+	font-weight: bold;
+}
 .logout a{
 	display: inline-block;
 	color: #fff;
