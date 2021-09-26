@@ -65,6 +65,13 @@ public class MemberServiceImpl implements MemberService {
 		memberDao.updatePwd(m);	
 	}
 
+	@Override
+	public int memberCount() {
+		return memberDao.memberCount();
+	}
+
+	
+
 	
 
 	

@@ -6,6 +6,7 @@ import java.util.Random;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionEvent;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -19,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.naver.service.MemberService;
 import com.naver.service.RecipyService;
 import com.naver.vo.MemberVO;
-import com.naver.vo.RecipyVO;
 
 import pwdconv.PwdChange;
 
@@ -142,19 +142,24 @@ public class HomeController {
 		
 		//총레시피갯수
 		int recipyCount = this.recipyService.recipyCount();
+		//총회원수
+		int memberCount = this.memberService.memberCount();
+		//총 방문자수
+		//int 퍄
 		
-
 		if (id != null) {
 			MemberVO m = this.memberService.getMember(id);
 			ModelAndView am = new ModelAndView();
 			am.setViewName("main/main2");
 			am.addObject("recipyCount",recipyCount);
+			am.addObject("memberCount",memberCount);
 			am.addObject("m", m);
 			return am;
 		} else {
 			ModelAndView am = new ModelAndView();
 			am.setViewName("main/main2");
 			am.addObject("recipyCount",recipyCount);
+			am.addObject("memberCount",memberCount);
 			return am;
 		}
 		

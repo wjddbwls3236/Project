@@ -82,7 +82,7 @@
 			<li>
 				<div>
 					<div class="contents1">회원수</div>
-					<div class="result">128,021</div>
+					<div class="result">${memberCount}</div>
 				</div>
 			</li>
 			<li>

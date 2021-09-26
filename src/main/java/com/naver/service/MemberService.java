@@ -27,6 +27,10 @@ public interface MemberService {
 
 	void updatePwd(MemberVO m);
 
+	int memberCount();
+
+	
+
 	
 
 	

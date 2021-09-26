@@ -27,6 +27,10 @@ public interface MemberDAO {
 
 	void updatePwd(MemberVO m);
 
+	int memberCount();
+
+	
+
 	
 
 

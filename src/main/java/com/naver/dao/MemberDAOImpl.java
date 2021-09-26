@@ -65,6 +65,12 @@ public class MemberDAOImpl implements MemberDAO {
 		sqlSession.update("p_edit",m);
 	}
 
+	@Override
+	public int memberCount() {
+		return sqlSession.selectOne("m_count"); //총 멤버수
+	}
+
+
 	
 
 }
