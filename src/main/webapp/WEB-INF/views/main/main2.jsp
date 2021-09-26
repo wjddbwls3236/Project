@@ -100,7 +100,7 @@
 			<li>
 				<div>
 					<div class="contents1">총 레시피 수</div>
-					<div class="result">13,946,595</div>
+					<div class="result">${recipyCount}</div>
 				</div>
 			</li>
 		</ul>

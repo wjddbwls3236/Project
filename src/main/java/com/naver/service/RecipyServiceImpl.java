@@ -51,4 +51,9 @@ public class RecipyServiceImpl implements RecipyService {
 		recipyDao.delRecipy(recipy_no);		
 	}
 
+	@Override
+	public int recipyCount() {
+		return recipyDao.recipyCount();
+	}
+
 }

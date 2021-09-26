@@ -55,5 +55,9 @@
 	<delete id="recipy_del">
 		delete from recipy where recipy_no = #{recipy_no}
 	</delete>
-
+	
+	<!-- 레시피 총 갯수 -->
+	<select id="recipy_count" resultType="int">
+	  select count(*) from recipy 
+	</select>
 </mapper>

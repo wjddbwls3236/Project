@@ -19,4 +19,6 @@ public interface RecipyService {
 
 	void delRecipy(int recipy_no);
 
+	int recipyCount();
+
 }

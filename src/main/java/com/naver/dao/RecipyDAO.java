@@ -19,4 +19,6 @@ public interface RecipyDAO {
 
 	void delRecipy(int recipy_no);
 
+	int recipyCount();
+
 }

@@ -148,11 +148,13 @@ public class HomeController {
 			MemberVO m = this.memberService.getMember(id);
 			ModelAndView am = new ModelAndView();
 			am.setViewName("main/main2");
+			am.addObject("recipyCount",recipyCount);
 			am.addObject("m", m);
 			return am;
 		} else {
 			ModelAndView am = new ModelAndView();
 			am.setViewName("main/main2");
+			am.addObject("recipyCount",recipyCount);
 			return am;
 		}
 		

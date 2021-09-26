@@ -47,6 +47,12 @@ public class RecipyDAOImpl implements RecipyDAO {
 		sqlSession.delete("recipy_del",recipy_no);		
 	}
 
+	@Override
+	public int recipyCount() {
+		
+		return sqlSession.selectOne("recipy_count");
+	}
+
 	
 	
 }
