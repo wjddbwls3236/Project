@@ -3,7 +3,7 @@ package com.naver.dao;
 import java.util.List;
 
 import com.naver.vo.MemberVO;
-import com.naver.vo.OderSeqVO;
+
 
 public interface MemberDAO {
 

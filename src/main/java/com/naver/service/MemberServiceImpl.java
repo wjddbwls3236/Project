@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.naver.dao.MemberDAO;
 import com.naver.vo.MemberVO;
-import com.naver.vo.OderSeqVO;
+
 
 @Service
 public class MemberServiceImpl implements MemberService {

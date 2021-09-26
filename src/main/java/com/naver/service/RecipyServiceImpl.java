@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.naver.dao.RecipyDAO;
-import com.naver.vo.OderSeqVO;
+
 import com.naver.vo.RecipyVO;
 
 @Service
@@ -26,11 +26,6 @@ public class RecipyServiceImpl implements RecipyService {
 		recipyDao.insertRecipy(r);	
 	}
 
-	@Override
-	public void insertOderSeq(OderSeqVO o) {
-		recipyDao.insertOderSeq(o);
-		
-	}
 	@Transactional
 	@Override
 	public RecipyVO getRecipyCont(int recipy_no) {
@@ -44,17 +39,6 @@ public class RecipyServiceImpl implements RecipyService {
 	public RecipyVO getRecipyCont2(int recipy_no) { //조회수 증가 없음
 		//수정폼에서 쓰임
 		return recipyDao.getRecipyCont(recipy_no);
-	}
-
-	@Override
-	public OderSeqVO getOderCont(int recipy_no) { 
-		
-		return recipyDao.getOderCont(recipy_no);
-	}
-
-	@Override
-	public void insertMap(OderSeqVO o) {
-		recipyDao.insertMap(o);	
 	}
 
 	@Override

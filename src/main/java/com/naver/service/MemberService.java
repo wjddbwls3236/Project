@@ -3,7 +3,7 @@ package com.naver.service;
 import java.util.List;
 
 import com.naver.vo.MemberVO;
-import com.naver.vo.OderSeqVO;
+
 
 public interface MemberService {
 

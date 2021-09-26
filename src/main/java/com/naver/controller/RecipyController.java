@@ -81,7 +81,9 @@ public class RecipyController {
 			// 오라클로 부터 id에 해당하는 회원정보 가져옴(레시피 작성자 저장위해)
 			MemberVO m = this.memberService.getMember(id);
 
-			String saveFolder = request.getRealPath("resources/upload");
+			//String saveFolder = request.getRealPath("resources/upload");
+			String saveFolder = request.getSession().getServletContext().getRealPath("resources/upload");
+
 			int fileSize = 5 * 1024 * 1024;// 이진파일 최대크기
 			MultipartRequest multi = null;// 레시피사진을 받을 변수선언
 			multi = new MultipartRequest(request, saveFolder, fileSize, "UTF-8");

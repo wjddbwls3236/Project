@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.naver.vo.MemberVO;
-import com.naver.vo.OderSeqVO;
+
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
