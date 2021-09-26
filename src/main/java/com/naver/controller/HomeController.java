@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.service.MemberService;
+import com.naver.service.RecipyService;
 import com.naver.vo.MemberVO;
+import com.naver.vo.RecipyVO;
 
 import pwdconv.PwdChange;
 
@@ -25,8 +27,9 @@ import pwdconv.PwdChange;
 public class HomeController {
 
 	@Autowired
-	MemberService memberService;
-	
+	private MemberService memberService;
+	@Autowired
+	private RecipyService recipyService;
 	@Autowired
 	private JavaMailSender mailSender; //메일
 	
@@ -136,6 +139,9 @@ public class HomeController {
 	public ModelAndView index(HttpServletResponse response, HttpSession session) throws Exception {
 
 		String id = (String) session.getAttribute("id"); // 세션 아이디 저장할때 키이름
+		
+		//총레시피갯수
+		int recipyCount = this.recipyService.recipyCount();
 		
 
 		if (id != null) {
