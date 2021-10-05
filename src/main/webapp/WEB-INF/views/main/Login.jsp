@@ -18,14 +18,7 @@
     }
  }//로그인 인증 유효성 검증
  
- //비번찾기
- function pwd_find(){
-    $url="pwd_find";//매핑주소
-    window.open($url,"비번검색","width=400px,height=300px"+
-          ",scrollbars=yes");
-    //open(공지창경로,공지창이름,속성) 메서드로 폭이 300픽셀,
-    //높이가 300픽셀,스크롤바가 생성되는 새로운 공지창을 만든다.
- }
+
 </script>
 
 
@@ -49,7 +42,7 @@
 
 					<!-- 로고 -->
 					<a href="main2"><img src="./resources/image/logo0.png" alt="로고이미지"
-						style="width: 100%; height: 100%; display: inline-block;"> </a>
+						style="width: 60%; height: 100%; display: inline-block;"> </a>
 
 					<!-- 로그인버튼 -->
 					<form method="POST" action="member_login_ok" class="onboarding-form" onsubmit="return login_check();">

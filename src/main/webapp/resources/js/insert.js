@@ -22,28 +22,7 @@ $("#material_Up").append(newtext);
 }
  
  
- //순서추가 누르면 폼 추가(name값 증가)
- /*function seqUp_add(){
-	
-
-$newtext="";
-
-$newtext+='<div id="order_area" >';
-$newtext+=	'<div id="order_step">';
-$newtext+=	  '<div id="step1_tit">';
-$newtext+=		 '<p id="step1">Step'+a+'</p></div>';
-$newtext+=	  '<div id="step1_text" style="display: inline-block;">';
-$newtext+=		 '<textarea class="oder_1" id="oder_'+a+'" name="oder_'+a+'" placeholder="예) 사용할 야채를 먼저 손질해 주세요."></textarea></div>';
-$newtext+=	  '<div id="btn_add2">';
-$newtext+=		 '<button type="button" onclick="seqUp_add();" id="btn_add_2">순서 추가</button>';
-$newtext+='</div></div></div>';				
-
-a++;
-
-$("#recipe_orderUp").append($newtext);
  
-}*/
-
 
 function seqUp_add(){ //(name 값을 증가시키지 않고 배열로 받기)
 	
@@ -72,20 +51,14 @@ function write_check(){
  
     
     if($.trim($('#cok_title').val()) == ''){
-      alert('글제목을 입력하세요!');
-      $('#bbs_title').val('').focus();
+      alert('레시피제목을 입력하세요!');
+      $('#cok_title').val('').focus();
       return false;
     } 
-   /*
-    if($.trim($('#cok_intro').val()) == ''){
-      alert('재료를 입력하세요!');
-      $('#bbs_cont').val('').focus();
-      return false;
-    }
-     */
-   if($.trim($('#recipy_file').val()) == ''){
+   
+    if($.trim($('#recipy_file').val()) == ''){
       alert('음식사진을 첨부해주세요!');
-      $('#bbs_name').val('').focus();
+      
       return false;
     }
   }

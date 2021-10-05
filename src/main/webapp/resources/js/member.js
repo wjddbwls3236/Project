@@ -1,5 +1,8 @@
 $mbutton=0; //이메일 중복검색 유효성검증을 위한 변수 초기화
 $nbutton=0; //닉네임 중복검색 유효성검증을 위한 변수 초기화
+var passRule= /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/; //비번 유효성 검증
+var phonRule = /^\d{3}-\d{3,4}-\d{4}$/; //핸드폰 정규식
+
 
 function join_check(){
    if($.trim($("#mail_id").val())==""){
@@ -11,6 +14,12 @@ function join_check(){
    $mem_pwd2=$.trim($("#mem_pwd2").val());
    if($mem_pwd == ""){
       alert("비번을 입력하세요!");
+      $("#mem_pwd").val("").focus();
+      return false;
+   }
+   //비번 내용 확인
+   if(!passRule.test($("#mem_pwd").val())){
+      alert("비밀번호는 특수문자 /문자/숫자 포함 형태의 8~15자리 이내로 입력해주세요!");
       $("#mem_pwd").val("").focus();
       return false;
    }
@@ -43,6 +52,14 @@ function join_check(){
       $("#mem_phone").val("").focus();
       return false;
    }
+   
+   //폰 내용 확인
+   if(!phonRule.test($("#mem_phone").val())){
+      alert("폰번호를 정확하게 입력해 주세요");
+      $("#mem_phone").val("").focus();
+      return false;
+   }
+   
  if($mbutton == 0){
  alert("이메일 중복체크를 해주세요!");
  $("#mail_id").val("").focus();
@@ -60,6 +77,8 @@ function join_check(){
 
 //수정폼 유효성 검증
 function join_check2(){ 
+	
+    
    
    $mem_pwd=$.trim($("#mem_pwd").val());
    $mem_pwd2=$.trim($("#mem_pwd2").val());
@@ -68,6 +87,13 @@ function join_check2(){
       $("#mem_pwd").val("").focus();
       return false;
    }
+   //비번 내용 확인
+   if(!passRule.test($("#mem_pwd").val())){
+      alert("비밀번호는 특수문자 /문자/숫자 포함 형태의 8~15자리 이내로 입력해주세요!");
+      $("#mem_pwd").val("").focus();
+      return false;
+   }
+   
    if($mem_pwd2 == ""){
       alert("비번확인을 입력하세요!");
       $("#mem_pwd2").val("").focus();
@@ -98,12 +124,14 @@ function join_check2(){
       return false;
    }
 
- //if($nbutton == 0){          //일단 닉네임 수정 못하게
- //alert("닉네임 중복체크를 해주세요!");
- //$("#mem_nic").val("").focus();
- //     return false;
- // }*
-  
+ //폰 내용 확인
+   if(!phonRule.test($("#mem_phone").val())){
+      alert("폰번호를 정확하게 입력해 주세요");
+      $("#mem_phone").val("").focus();
+      return false;
+   }
+   
+ 
 }
 
 
@@ -115,7 +143,7 @@ function mail_check(){
    $mail_id=$.trim($("#mail_id").val());
    //1.입력글자 길이 체크
    if($mail_id.length < 4){
-      $newtext='<font color="red" size="3"><b>아이디는 4자 이상이어야 합니다.</b></font>';
+      $newtext='<font color="red" size="3"><b>메일아이디는 4자 이상이어야 합니다.</b></font>';
       $("#mailcheck").text('');
       //mailcheck 이메일 영역 문자열을 초기화
       $("#mailcheck").show();
@@ -127,7 +155,16 @@ function mail_check(){
       
       return false;
    };
- 
+   
+ //2.이메일입력글자 확인
+   if(!(validate_userid($mail_id))){
+      $newtext='<font color="red" size="3"><b>이메일 형식이어야 합니다 @을 포함해주세요</b></font>';
+      $("#mailcheck").text('');
+      $("#mailcheck").show();
+      $("#mailcheck").append($newtext);
+      $("#mail_id").val('').focus();
+      return false;
+   };
   
    //이메일 중복확인
     $.ajax({//$는 jQuery란 뜻. $.ajax 뜻은 jQuery 내의 아작스 실행
@@ -249,13 +286,26 @@ function nick_check(){
 }//nick_check()
 
 //정규표현식
+//닉네임
 function validate_usernick($mem_nic)
 {
-  var pattern= new RegExp(/^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{3,10}$/);
-  //닉네임을 한글 영문 숫자만 가능 2~10자리만 가능
+  var pattern= new RegExp(/^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣])+$/);
+  //닉네임을 한글 영문 숫자만 가능 
 
   return pattern.test($mem_nic);
 };
+
+//이메일
+function validate_userid($mail_id)
+{
+  var patterns= /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+ return patterns.test($mail_id);
+};
+
+
+
+ 
 
 
 

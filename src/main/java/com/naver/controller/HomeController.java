@@ -31,8 +31,7 @@ public class HomeController {
 	@Autowired
 	private RecipyService recipyService;
 	@Autowired
-	private JavaMailSender mailSender; //메일
-	
+	private JavaMailSender mailSender; // 메일
 
 	// 회원가입 페이지
 	@RequestMapping("/Join")
@@ -135,37 +134,38 @@ public class HomeController {
 	}
 
 	// 메인
-	@GetMapping("/main2")
+	@RequestMapping("/main2")
 	public ModelAndView index(HttpServletResponse response, HttpSession session) throws Exception {
 
-		String id = (String) session.getAttribute("id"); // 세션 아이디 저장할때 키이름
-		
-		//총레시피갯수
+		// 총레시피갯수
 		int recipyCount = this.recipyService.recipyCount();
-		//총회원수
+		// 총회원수
 		int memberCount = this.memberService.memberCount();
-		//총 방문자수
-		//int 퍄
-		
+		// 총 방문자수
+		// int 퍄
+		String id = (String) session.getAttribute("id"); // 세션 아이디 저장할때 키이름
+
 		if (id != null) {
 			MemberVO m = this.memberService.getMember(id);
 			ModelAndView am = new ModelAndView();
-			am.setViewName("main/main2");
-			am.addObject("recipyCount",recipyCount);
-			am.addObject("memberCount",memberCount);
+			
+			am.addObject("recipyCount", recipyCount);
+			am.addObject("memberCount", memberCount);
 			am.addObject("m", m);
+			am.setViewName("main/main2");
 			return am;
 		} else {
 			ModelAndView am = new ModelAndView();
 			am.setViewName("main/main2");
-			am.addObject("recipyCount",recipyCount);
-			am.addObject("memberCount",memberCount);
+			am.addObject("recipyCount", recipyCount);
+			am.addObject("memberCount", memberCount);
+			am.setViewName("main/main2");
 			return am;
 		}
-		
+
 	}
 
-	// member_logout
+	// 로그아웃
 	@RequestMapping("/member_logout") // 서버에 정보를 브라우저에 응답할때 리스폰즈씀
 	public String member_logout(HttpServletResponse response, HttpSession session) throws Exception {
 
@@ -212,7 +212,7 @@ public class HomeController {
 	public String member_edit_ok(MemberVO m, HttpServletResponse response, HttpSession session) throws Exception {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();// 출력스트림 생성
-		String mem_nic= m.getMem_nic(); //마이페이지에 닉네임 보내주기 위해
+		String mem_nic = m.getMem_nic(); // 마이페이지에 닉네임 보내주기 위해
 		String mail_id = (String) session.getAttribute("id");
 		if (mail_id == null) {
 			out.println("<script>");
@@ -227,7 +227,7 @@ public class HomeController {
 
 			out.println("<script>");
 			out.println("alert('정보 수정했습니다.');");
-			out.println("location='mypage?recipy_name="+mem_nic+"';");
+			out.println("location='mypage?recipy_name=" + mem_nic + "';");
 			out.println("</script>");
 		}
 		return null;
@@ -298,72 +298,93 @@ public class HomeController {
 
 	// 메인 페이지
 	@RequestMapping("/")
-	public String home() throws Exception {
-		return "main/main2";
+	public ModelAndView index1(HttpServletResponse response, HttpSession session) throws Exception {
+
+		// 총레시피갯수
+		int recipyCount = this.recipyService.recipyCount();
+		// 총회원수
+		int memberCount = this.memberService.memberCount();
+		// 총 방문자수
+		// int 퍄
+		String id = (String) session.getAttribute("id"); // 세션 아이디 저장할때 키이름
+
+		if (id != null) {
+			MemberVO m = this.memberService.getMember(id);
+			ModelAndView am = new ModelAndView();
+			
+			am.addObject("recipyCount", recipyCount);
+			am.addObject("memberCount", memberCount);
+			am.addObject("m", m);
+			am.setViewName("main/main2");
+			return am;
+		} else {
+			ModelAndView am = new ModelAndView();
+			am.setViewName("main/main2");
+			am.addObject("recipyCount", recipyCount);
+			am.addObject("memberCount", memberCount);
+			am.setViewName("main/main2");
+			return am;
+		}
 
 	}
 
-	//비번찾기 폼
+	// 비번찾기 폼
 	@RequestMapping("/pwd_find")
 	public String pwd_find() {
 		return "main/pwd_find";
 	}
-	
-	//이메일로 비번 보내기
+
+	// 이메일로 비번 보내기
 	@RequestMapping("/pwd_find_ok")
-	public void pwd_find_ok(@RequestParam("login_mail")String login_mail,@RequestParam("login_name")String login_name,HttpServletResponse response, MemberVO m) 
-	throws Exception{
-		
+	public void pwd_find_ok(@RequestParam("login_mail") String login_mail,
+			@RequestParam("login_name") String login_name, HttpServletResponse response, MemberVO m) throws Exception {
+
 		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out=response.getWriter();//출력스트림 생성
-		
-		m.setMail_id(login_mail); m.setMem_name(login_name); //받아온 메일 아이디와 이름 저장 후
-		MemberVO pm=this.memberService.pwdMember(m); //회원아이디와 이름을 기준으로 오라클로부터 회원정보 검색
-		
-		if(pm==null) {
+		PrintWriter out = response.getWriter();// 출력스트림 생성
+
+		m.setMail_id(login_mail);
+		m.setMem_name(login_name); // 받아온 메일 아이디와 이름 저장 후
+		MemberVO pm = this.memberService.pwdMember(m); // 회원아이디와 이름을 기준으로 오라클로부터 회원정보 검색
+
+		if (pm == null) {
 			out.println("<script>");
 			out.println("alert('회원정보를 찾을 수 없습니다');");
 			out.println("history.back();");
 			out.println("</script>");
-		}else {
-			Random r=new Random();//난수 발생
-			int pwd_random=r.nextInt(100000);//0~100000 사이의 임의의 정수숫자 난수를 발생
-			String ran_pwd=Integer.toString(pwd_random);//임시정수를 문자열로 변경
-			m.setMem_pwd(PwdChange.getPassWordToXEMD5String(ran_pwd)); //임시 비번을 암호화
-			
-			this.memberService.updatePwd(m);//메일아이디 기준으로 임시비번을 수정
-			
-			//이메일 전송하기
-			String title= "dailycook 임시비밀번호"; //메일제목
-			String content= "임시 비밀번호는 "+ran_pwd+"입니다. 비밀번호를 변경하여 사용하세요"; //메일 내용
-			
+		} else {
+			Random r = new Random();// 난수 발생
+			int pwd_random = r.nextInt(100000);// 0~100000 사이의 임의의 정수숫자 난수를 발생
+			String ran_pwd = Integer.toString(pwd_random);// 임시정수를 문자열로 변경
+			m.setMem_pwd(PwdChange.getPassWordToXEMD5String(ran_pwd)); // 임시 비번을 암호화
+
+			this.memberService.updatePwd(m);// 메일아이디 기준으로 임시비번을 수정
+
+			// 이메일 전송하기
+			String title = "dailycook 임시비밀번호"; // 메일제목
+			String content = "임시 비밀번호는 " + ran_pwd + "입니다. 비밀번호를 변경하여 사용하세요"; // 메일 내용
+
 			try {
 				MimeMessage message = mailSender.createMimeMessage();
-				MimeMessageHelper messageHelper = new MimeMessageHelper(message,true,"UTF-8");
-				
+				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+
 				messageHelper.setFrom("yujin.jeonga@gmail.com"); // 보내는사람 생략하면 정상작동을 안함
 				messageHelper.setTo(login_mail); // 받는사람 이메일
-				messageHelper.setSubject(title); //생략 가능
+				messageHelper.setSubject(title); // 생략 가능
 				messageHelper.setText(content); // 메일 내용
-				
+
 				mailSender.send(message);
-				
-				
+
 				out.println("<script>");
 				out.println("alert('이메일로 전송되었습니다.');");
 				out.println("location='Login';");
 				out.println("</script>");
-				
-			}catch(Exception e) {
+
+			} catch (Exception e) {
 				System.out.println(e);
 			}
-			
+
 		}
-		
+
 	}
-	
-	
-	
-	
-	
+
 }
